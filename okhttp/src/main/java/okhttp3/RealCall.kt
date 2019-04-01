@@ -34,7 +34,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.RejectedExecutionException
 import java.util.concurrent.atomic.AtomicInteger
 
-internal class RealCall private constructor(
+class RealCall private constructor(
   val client: OkHttpClient,
   /** The application's original request unadulterated by redirects or auth headers.  */
   val originalRequest: Request,
@@ -90,7 +90,7 @@ internal class RealCall private constructor(
     return RealCall.newRealCall(client, originalRequest, forWebSocket)
   }
 
-  internal inner class AsyncCall(
+  inner class AsyncCall(
     private val responseCallback: Callback
   ) : NamedRunnable("OkHttp %s", redactedUrl()) {
     @Volatile private var callsPerHost = AtomicInteger(0)
